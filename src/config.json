@@ -1,0 +1,80 @@
+{
+  "name": "Azure-Monitoring",
+  "type": "executer",
+  "exposeRoute": false,
+  "execProgram": "node",
+  "main": "app.js",
+  "imgUrl": "logo.png",
+  "version": "1.0.0",
+  "settings" : [
+    {
+      "name": "clientId",
+      "viewName": "Client or App ID",
+      "type": "string"
+    },
+    {
+      "name": "secret",
+      "viewName": "Secret or Password",
+      "type": "vault"
+    },
+    {
+      "name": "domain",
+      "viewName": "Domain or Tenant ID",
+      "type": "string"
+    },
+    {
+      "name": "subscriptionId",
+      "viewName": "Subscription ID",
+      "type": "string"
+    }
+  ],
+  "methods": [
+    {
+      "name": "listAlertRules",
+      "viewName": "List Alert Rules",
+      "params": [
+        {
+          "name": "subscription",
+          "viewName": "Subscription",
+          "type": "autocomplete",
+          "autocompleteType": "function",
+          "functionName": "getSubscriptions"
+        },
+        {
+          "name": "resourceGroup",
+          "viewName": "Resource Group",
+          "type": "autocomplete",
+          "autocompleteType": "function",
+          "functionName": "getResourceGroups"
+        }
+      ]
+    },
+    {
+      "name": "listAlertRuleStatus",
+      "viewName": "List Alert Rule Status",
+      "params": [
+        {
+          "name": "subscription",
+          "viewName": "Subscription",
+          "type": "autocomplete",
+          "autocompleteType": "function",
+          "functionName": "getSubscriptions"
+        },
+        {
+          "name": "resourceGroup",
+          "viewName": "Resource Group",
+          "type": "autocomplete",
+          "autocompleteType": "function",
+          "functionName": "getResourceGroups"
+        },
+        {
+          "name": "alertRule",
+          "viewName": "Alert Rule",
+          "type": "autocomplete",
+          "autocompleteType": "function",
+          "functionName": "getAlertRules"
+        }
+      ]
+    }
+  ]
+}

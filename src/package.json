@@ -1,0 +1,17 @@
+{
+  "name": "kaholo-plugin-azure-monitoring",
+  "version": "1.0.0",
+  "description": "Azure Monitoring plugin for Kaholo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaholo Team",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/arm-monitor": "^6.0.0",
+    "@azure/arm-resources": "^4.2.0",
+    "@azure/ms-rest-nodeauth": "^3.0.3",
+    "@azure/arm-subscriptions": "^3.0.0"
+  }
+}

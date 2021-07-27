@@ -6,7 +6,7 @@ const armResource = require("@azure/arm-resources");
 
 function autoMapper(params){
     const mapped = {};
-    if (params && params.params > 0) {
+    if (params && params.length > 0) {
         params.forEach(param=>{
             mapped[param.name] = param.value;
         })
@@ -17,8 +17,8 @@ function autoMapper(params){
 function filterByQuery(items, query){
     if (!query) return items;
     const keyWords = query.trim().toLowerCase().split(" ");
-    return items.filter(item => keyWords.every(keyWord => item.id.toLowerCase().contains(keyWord) || 
-                                                          item.value.toLowerCase().contains(keyWord)));
+    return items.filter(item => keyWords.every(keyWord => item.id.toLowerCase().includes(keyWord) || 
+                                                          item.value.toLowerCase().includes(keyWord)));
 }
 
 // main methods
@@ -42,7 +42,7 @@ async function getResourceGroups(query, pluginSettings, actionParams){
     const params = autoMapper(actionParams), settings = autoMapper(pluginSettings);
     const subscriptionId = parseAutocomplete(params.subscription) || settings.subscriptionId;
     const resourceClient = new armResource.ResourceManagementClient(await getCreds(settings), subscriptionId);
-    const resourceGroups = await resourceClient.resourceGroups.list();
+    let resourceGroups = await resourceClient.resourceGroups.list();
     resourceGroups = resourceGroups.map(group => ({id: group.name, value: group.name}));
     return filterByQuery(resourceGroups, query);
 }
